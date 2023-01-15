@@ -1,7 +1,7 @@
 package com.jeff.carnetadresse.configuration;
 
-import com.jeff.carnetadresse.entity.Adresse;
-import com.jeff.carnetadresse.entity.Contact;
+import com.jeff.carnetadresse.domain.entity.Adresse;
+import com.jeff.carnetadresse.domain.entity.Contact;
 import com.jeff.carnetadresse.repository.AdresseRepository;
 import com.jeff.carnetadresse.repository.ContactRepository;
 import org.slf4j.Logger;

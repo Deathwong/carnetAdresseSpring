@@ -1,4 +1,4 @@
-package com.jeff.carnetadresse.entity;
+package com.jeff.carnetadresse.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.jeff.carnetadresse.repository;
 
-import com.jeff.carnetadresse.entity.Adresse;
+import com.jeff.carnetadresse.domain.entity.Adresse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

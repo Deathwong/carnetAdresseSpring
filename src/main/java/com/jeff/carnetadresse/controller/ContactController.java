@@ -1,8 +1,8 @@
 package com.jeff.carnetadresse.controller;
 
-import com.jeff.carnetadresse.entity.Adresse;
-import com.jeff.carnetadresse.entity.Contact;
-import com.jeff.carnetadresse.exception.ContactNotFoundException;
+import com.jeff.carnetadresse.domain.entity.Adresse;
+import com.jeff.carnetadresse.domain.entity.Contact;
+import com.jeff.carnetadresse.exception.EntityNotFoundException;
 import com.jeff.carnetadresse.repository.AdresseRepository;
 import com.jeff.carnetadresse.repository.ContactRepository;
 import org.springframework.http.MediaType;
@@ -30,7 +30,9 @@ public class ContactController {
 
     @GetMapping("/{id}")
     ResponseEntity<Contact> getContactById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id)));
+        return ResponseEntity.ok()
+                .body(contactRepository.findById(id)
+                        .orElseThrow(() -> new EntityNotFoundException("could not find contact %s".formatted(id))));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -49,7 +51,7 @@ public class ContactController {
             adresseRepository.save(adresse);
             return ResponseEntity.ok().body(contactRepository.save(contact));
         } else {
-            throw new ContactNotFoundException(id);
+            throw new EntityNotFoundException("could not find contact %s".formatted(id));
         }
     }
 
