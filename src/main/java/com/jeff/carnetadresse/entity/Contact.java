@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class Contact implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -37,29 +37,29 @@ public class Contact implements Serializable {
     @Column(name = "email", length = 100)
     private String email;
 
-    @Column(name = "age", length = 3)
+    @Column(name = "age")
     private Integer age;
 
-    @Column(name = "dateAnniversaire")
+    @Column(name = "date_anniversaire")
     private LocalDate dateAnniversaire;
 
-    @Column(name = "sexe", length = 10)
+    @Column(name = "sexe", length = 50)
     private String sexe;
 
-    @Column(name = "reseauSocial", length = 50)
-    private String reseauSocial;
+    @Column(name = "reseaux_sociaux", length = 100)
+    private String reseauxSociaux;
 
     @Column(name = "profession", length = 100)
     private String profession;
 
-    @Column(name = "situationFamiliale", length = 100)
+    @Column(name = "situation_familiale", length = 100)
     private String situationFamiliale;
 
     @Column(name = "note", length = 100)
     private String note;
 
     @OneToOne
-    @JoinColumn(name = "idAdresse")
+    @JoinColumn(name = "id_adresse")
     private Adresse adresse;
 }
 

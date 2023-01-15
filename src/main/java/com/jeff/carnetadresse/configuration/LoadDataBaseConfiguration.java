@@ -22,16 +22,16 @@ public class LoadDataBaseConfiguration {
 
         Adresse adresse = Adresse.builder()
                 .numeroRue(2)
-                .nomRue("nomRue")
+                .nomRue("nom_rue")
                 .codePostal("Code")
                 .departement("departement")
                 .ville("ville")
                 .pays("pays")
                 .region("region")
-                .lieuDit("lieuDit")
-                .complementDeux("complementDeux")
-                .complementTrois("complementTrois")
-                .complementUn("complementUn")
+                .lieuDit("lieu_dit")
+                .complementDeux("complement_deux")
+                .complementTrois("complement_trois")
+                .complementUn("complement_un")
                 .build();
 
         adresseRepository.save(adresse);
@@ -45,10 +45,10 @@ public class LoadDataBaseConfiguration {
                 .prenom("prenom")
                 .surnom("surnom")
                 .note("note")
-                .reseauSocial("reseauSocial")
+                .reseauxSociaux("reseaux_sociaux")
                 .telephone("telephone")
                 .profession("profession")
-                .situationFamiliale("situationFamiliale")
+                .situationFamiliale("situation_familiale")
                 .adresse(adresse)
                 .build();
 

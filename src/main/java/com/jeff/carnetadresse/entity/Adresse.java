@@ -17,23 +17,23 @@ import java.io.Serializable;
 public class Adresse implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "numeroRue")
+    @Column(name = "numero_rue")
     private Integer numeroRue;
 
-    @Column(name = "nomRue", length = 50)
+    @Column(name = "nom_rue", length = 50)
     private String nomRue;
 
     @Column(name = "ville", nullable = false, length = 50)
     private String ville;
 
-    @Column(name = "pays", nullable = false, length = 20)
+    @Column(name = "pays", nullable = false, length = 50)
     private String pays;
 
-    @Column(name = "codePostal", nullable = false, length = 5)
+    @Column(name = "code_postal", nullable = false, length = 20)
     private String codePostal;
 
     @Column(name = "region", length = 50)
@@ -42,15 +42,15 @@ public class Adresse implements Serializable {
     @Column(name = "departement", length = 50)
     private String departement;
 
-    @Column(name = "lieuDit", length = 50)
+    @Column(name = "lieu_dit", length = 100)
     private String lieuDit;
 
-    @Column(name = "complementUn", length = 50)
+    @Column(name = "complement_un", length = 50)
     private String complementUn;
 
-    @Column(name = "complementDeux", length = 50)
+    @Column(name = "complement_deux", length = 50)
     private String complementDeux;
 
-    @Column(name = "complementTrois", length = 50)
+    @Column(name = "complement_trois", length = 50)
     private String complementTrois;
 }

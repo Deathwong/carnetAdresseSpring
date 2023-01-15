@@ -1,6 +1,8 @@
 package com.jeff.carnetadresse.controller;
 
+import com.jeff.carnetadresse.entity.Adresse;
 import com.jeff.carnetadresse.entity.Contact;
+import com.jeff.carnetadresse.exception.ContactNotFoundException;
 import com.jeff.carnetadresse.repository.AdresseRepository;
 import com.jeff.carnetadresse.repository.ContactRepository;
 import org.springframework.http.MediaType;
@@ -26,13 +28,14 @@ public class ContactController {
     }
 
     @GetMapping("/{id}")
-    Contact getContactById(@PathVariable Long id) throws Exception {
-        return contactRepository.findById(id).orElseThrow(() -> new Exception("Contact not found"));
+    Contact getContactById(@PathVariable Long id) {
+        return contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     Contact saveContact(@RequestBody Contact contact) {
-        adresseRepository.save()
+        Adresse adresse = contact.getAdresse();
+        adresseRepository.save(adresse);
         return contactRepository.save(contact);
     }
 
@@ -41,14 +44,18 @@ public class ContactController {
         boolean exist = contactRepository.existsById(id);
 
         if (exist) {
+            Adresse adresse = contact.getAdresse();
+            adresseRepository.save(adresse);
             return contactRepository.save(contact);
         } else {
-            throw new Exception("Contact not found");
+            throw new ContactNotFoundException(id);
         }
     }
 
     @DeleteMapping("/{id}")
-    void deleteContact(@PathVariable Long id) throws Exception {
+    void deleteContact(@PathVariable Long id) {
+        Long idAdresse = adresseRepository.findIdByContactId(id);
         contactRepository.deleteById(id);
+        adresseRepository.deleteById(idAdresse);
     }
 }
