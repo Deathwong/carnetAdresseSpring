@@ -6,6 +6,7 @@ import com.jeff.carnetadresse.exception.ContactNotFoundException;
 import com.jeff.carnetadresse.repository.AdresseRepository;
 import com.jeff.carnetadresse.repository.ContactRepository;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,39 +24,40 @@ public class ContactController {
     }
 
     @GetMapping
-    List<Contact> getAllContact() {
-        return contactRepository.findAll();
+    ResponseEntity<List<Contact>> getAllContact() {
+        return ResponseEntity.ok().body(contactRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    Contact getContactById(@PathVariable Long id) {
-        return contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id));
+    ResponseEntity<Contact> getContactById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id)));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    Contact saveContact(@RequestBody Contact contact) {
+    ResponseEntity<Contact> saveContact(@RequestBody Contact contact) {
         Adresse adresse = contact.getAdresse();
         adresseRepository.save(adresse);
-        return contactRepository.save(contact);
+        return ResponseEntity.ok().body(contactRepository.save(contact));
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    Contact updateContact(@RequestBody Contact contact, @PathVariable Long id) throws Exception {
+    ResponseEntity<Contact> updateContact(@RequestBody Contact contact, @PathVariable Long id) {
         boolean exist = contactRepository.existsById(id);
 
         if (exist) {
             Adresse adresse = contact.getAdresse();
             adresseRepository.save(adresse);
-            return contactRepository.save(contact);
+            return ResponseEntity.ok().body(contactRepository.save(contact));
         } else {
             throw new ContactNotFoundException(id);
         }
     }
 
     @DeleteMapping("/{id}")
-    void deleteContact(@PathVariable Long id) {
+    ResponseEntity<Void> deleteContact(@PathVariable Long id) {
         Long idAdresse = adresseRepository.findIdByContactId(id);
         contactRepository.deleteById(id);
         adresseRepository.deleteById(idAdresse);
+        return ResponseEntity.ok().build();
     }
 }
