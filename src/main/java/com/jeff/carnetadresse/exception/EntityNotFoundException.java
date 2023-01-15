@@ -8,5 +8,5 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public class EntityNotFoundException extends RuntimeException {
-    private String message;
+    private String errorMessage;
 }
