@@ -21,6 +21,4 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return new ResponseEntity<>(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage()),
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-
 }
