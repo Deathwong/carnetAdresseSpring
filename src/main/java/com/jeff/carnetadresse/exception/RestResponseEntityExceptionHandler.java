@@ -17,8 +17,15 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     @ExceptionHandler(Exception.class)
-    ResponseEntity<ErrorResponse> handleContactNotFoundException(Exception ex) {
+    ResponseEntity<ErrorResponse> handleStandardException(Exception ex) {
         return new ResponseEntity<>(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage()),
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+    @ExceptionHandler(EntityNotSaveException.class)
+    ResponseEntity<ErrorResponse> handleEntityNotSaveException(EntityNotSaveException ex) {
+        return new ResponseEntity<>(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getErrorMessage()),
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
