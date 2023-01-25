@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class ContactServiceImpl implements ContactService {
-    
+
     private final ContactRepository contactRepository;
     private final AdresseRepository adresseRepository;
     private final ContactMapper contactMapper;
@@ -46,13 +46,12 @@ public class ContactServiceImpl implements ContactService {
     public ContactDto save(ContactDto contactDto) {
         try {
             Contact contact = contactMapper.getContact(contactDto);
-
             adresseRepository.save(contact.getAdresse());
             contact = contactRepository.save(contact);
 
             return contactMapper.getContact(contact);
         } catch (Exception exception) {
-            throw new EntityNotSaveException(Constant.NOT_SAVE);
+            throw new EntityNotSaveException(Constant.NOT_SAVE_MESSAGE);
         }
     }
 
@@ -70,7 +69,7 @@ public class ContactServiceImpl implements ContactService {
 
                 return contactMapper.getContact(contact);
             } catch (Exception exception) {
-                throw new EntityNotSaveException(Constant.NOT_SAVE);
+                throw new EntityNotSaveException(Constant.NOT_SAVE_MESSAGE);
             }
         } else {
             throw new EntityNotFoundException(Constant.ENTITY_NOT_FOUND_MESSAGE.formatted(Contact.class.getSimpleName()

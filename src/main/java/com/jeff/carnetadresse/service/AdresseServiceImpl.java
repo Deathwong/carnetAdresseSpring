@@ -58,7 +58,7 @@ public class AdresseServiceImpl implements AdresseService {
             try {
                 adresse = adresseRepository.save(adresse);
             } catch (Exception exception) {
-                throw new EntityNotSaveException(Constant.NOT_SAVE);
+                throw new EntityNotSaveException(Constant.NOT_SAVE_MESSAGE);
             }
 
             return adresseMapper.getAdresse(adresse);
